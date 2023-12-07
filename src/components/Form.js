@@ -1,26 +1,15 @@
 // Form.js
 
-import { useState } from 'react';
-import axios from 'axios';
-
-const Form = () => {
-  const [city, setCity] = useState('');
-  const getWeather = (e) => {
-    e.preventDefault();
-    axios
-      .get(`http://localhost:5080/weather-data?${city}`)
-      .then((res) => console.log(res));
-  };
-
+const Form = (props) => {
   return (
     <form>
       <input
         type="text"
         name="city"
         placeholder="都市名"
-        onChange={(e) => setCity(e.target.value)}
+        onChange={(e) => props.setCity(e.target.value)}
       />
-      <button type="submit" onClick={getWeather}>
+      <button type="submit" onClick={props.getWeather}>
         Get Weather
       </button>
     </form>
