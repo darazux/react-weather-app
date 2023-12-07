@@ -1,0 +1,4 @@
+[build]
+  base    = "next-weather-app"
+  publish = "next-weather-app/build"
+  command = "npm run build"
