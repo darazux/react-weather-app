@@ -1,17 +1,15 @@
 // Form.js
 
-const Form = (props) => {
+const Form = ({ setCity, getWeather }) => {
   return (
-    <form>
+    <form onSubmit={getWeather}>
       <input
         type="text"
         name="city"
         placeholder="都市名"
-        onChange={(e) => props.setCity(e.target.value)}
+        onChange={(e) => setCity(e.target.value)}
       />
-      <button type="submit" onClick={props.getWeather}>
-        Get Weather
-      </button>
+      <button type="submit">Get Weather</button>
     </form>
   );
 };
