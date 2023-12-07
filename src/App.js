@@ -17,15 +17,17 @@ function App() {
   });
   const getWeather = (e) => {
     e.preventDefault();
-    axios.get(`http://localhost:5080/weather-data?${city}`).then((res) => {
-      setResults({
-        country: res.data.location.country,
-        cityName: res.data.location.name,
-        temperature: res.data.current.temp_c,
-        conditionText: res.data.current.condition.text,
-        icon: res.data.current.condition.icon,
+    axios
+      .get(`https://proxy-server-node.vercel.app/weather-data?${city}`)
+      .then((res) => {
+        setResults({
+          country: res.data.location.country,
+          cityName: res.data.location.name,
+          temperature: res.data.current.temp_c,
+          conditionText: res.data.current.condition.text,
+          icon: res.data.current.condition.icon,
+        });
       });
-    });
   };
   return (
     <div className="wrapper">
