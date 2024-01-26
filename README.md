@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Weather App using React framework
+## 概要
+[Weather API](https://www.weatherapi.com/) の天気データを取得し表示するWebアプリです。  
+api_key/api_secretを秘匿するため、中間にプロキシを経由させています。  
+React framework を使用しています。
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+以下の書籍を参考に作成しました。
+[「はじめてつくるReactアプリ」](https://monotein.com/books/react-book)
 
-## Available Scripts
+## 構成図
+```mermaid
+   flowchart TB
+   style fw1 fill:#f9f,color:#000,stroke-dasharray: 5 5
+   style fw2 fill:#f9f,color:#000,stroke-dasharray: 5 5
+   style c1 stroke-dasharray: 5 5
+   style c2 stroke-dasharray: 5 5
+   style p1 stroke-dasharray: 5 5
+   style p2 stroke-dasharray: 5 5
+   style s1 stroke-dasharray: 5 5
+   style s2 stroke-dasharray: 5 5
+   style react fill:#00f
 
-In the project directory, you can run:
+   c1-->c2-->fw1-->p1-->s1
+   s2-->p2-->fw2-->c3-->c4
+   subgraph Client
+       c0[Input city name in text box]-->c1[Click button]
+       c4[View Weather Result Data]
+   end
+   subgraph Browser
+       c2[Send HTTP Request]
+       c3[Receive Weather Data]
+   end
+   subgraph react [React Framework]
+       fw1[Send HTTP Request]
+       fw2[Receive Weather Data]
+   end
+   subgraph vercel [Vercel Web Hosting Service]
+       react
+   end
+   subgraph Proxy
+       p1[Forward HTTP Request]
+       p2[Foward Weather Data]
+   end
+   subgraph API-Server
+       s1[Receive HTTP Request]-->s2[Send Weather Data]
+   end
+```
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 動作
+1. Webアプリのテキストボックスへ都市名を入力する
+1. [Get Weather]ボタンをクリックする
+1. 国名、都市名、気温、天気を表示する
